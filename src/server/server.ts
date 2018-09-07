@@ -1,3 +1,5 @@
+import * as db from "./db";
+
 const WebSocketServer = require("rpc-websockets").Server;
 const option = require("config");
 
@@ -9,7 +11,7 @@ const server = new WebSocketServer({
 
 server.register(
     "startVerification",
-    ({
+    async ({
         publicKey,
         assetAddress
     }: {
@@ -20,6 +22,7 @@ server.register(
         // Create a nonce
         // Encrypt the nonce
         const nonce = "0";
+        await db.save(nonce);
         const callback = `http://${option.host}:${option.port}/`;
         return {
             message: encrypt(JSON.stringify({ nonce, callback }), publicKey)
@@ -31,6 +34,11 @@ function encrypt(message: string, publicKey: string) {
     return message;
 }
 
-server.register("callback", (nonce: string) => {
-    return true;
+server.register("callback", async ({ nonce }: { nonce: string }) => {
+    if (await db.exist(nonce)) {
+        await db.remove(nonce);
+        return true;
+    }
+
+    return false;
 });
