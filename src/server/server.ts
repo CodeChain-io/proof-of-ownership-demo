@@ -28,21 +28,34 @@ server.register(
     }) => {
         // Encrypt the nonce
 
-        const pkh = await codechain.getPKH({
-            sdk,
-            assetTransactionHash,
-            transactionIndex
-        });
-        if (blake256(publicKey) !== pkh) {
-            throw new PoOErrormError(ErrorCode.PublicKeyMisedMatch);
-        }
+        try {
+            const pkh = await codechain.getPKH({
+                sdk,
+                assetTransactionHash,
+                transactionIndex
+            });
+            if (blake256(publicKey) !== pkh) {
+                throw new PoOErrormError(
+                    ErrorCode.PublicKeyMisedMatch,
+                    `publicKey: ${publicKey} -> ${blake256(
+                        publicKey
+                    )} pkh: ${pkh}`
+                );
+            }
 
-        const nonce = getRandomNonce();
-        await db.save(nonce);
-        const callback = `http://${option.host}:${option.port}/`;
-        return {
-            message: encrypt(JSON.stringify({ nonce, callback }), publicKey)
-        };
+            const nonce = getRandomNonce();
+            await db.save(nonce);
+            const callback = `http://${option.host}:${option.port}/`;
+            return {
+                message: encrypt(JSON.stringify({ nonce, callback }), publicKey)
+            };
+        } catch (err) {
+            if (err.toJSONRPCError) {
+                throw err.toJSONRPCError();
+            } else {
+                throw err;
+            }
+        }
     }
 );
 
