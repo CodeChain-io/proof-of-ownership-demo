@@ -1,7 +1,13 @@
+import { SDK } from "codechain-sdk";
+import { blake256 } from "codechain-sdk/lib/utils";
+
+import * as codechain from "./codechain";
 import * as db from "./db";
+import { ErrorCode, PoOErrormError } from "./error";
 
 const WebSocketServer = require("rpc-websockets").Server;
 const option = require("config");
+const sdk = new SDK({ server: option.codechainRPCURL });
 
 // instantiate Server and start listening for requests
 const server = new WebSocketServer({
@@ -13,14 +19,24 @@ server.register(
     "startVerification",
     async ({
         publicKey,
-        assetAddress
+        assetTransactionHash,
+        transactionIndex
     }: {
         publicKey: string;
-        assetAddress: string;
+        assetTransactionHash: string;
+        transactionIndex: number;
     }) => {
-        // Get public key hash from CodeChain
-        // Create a nonce
         // Encrypt the nonce
+
+        const pkh = await codechain.getPKH({
+            sdk,
+            assetTransactionHash,
+            transactionIndex
+        });
+        if (blake256(publicKey) !== pkh) {
+            throw new PoOErrormError(ErrorCode.PublicKeyMisedMatch);
+        }
+
         const nonce = getRandomNonce();
         await db.save(nonce);
         const callback = `http://${option.host}:${option.port}/`;
