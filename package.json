@@ -10,10 +10,16 @@
     "fmt": "tslint -p . --fix && prettier 'src/**/*.{ts,json,js}' --write"
   },
   "devDependencies": {
+    "@types/config": "^0.0.34",
     "@types/node": "^10.7.1",
     "prettier": "1.14.2",
+    "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.10.0",
     "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "config": "^2.0.1",
+    "rpc-websockets": "^4.3.2"
   }
 }
