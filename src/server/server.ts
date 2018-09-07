@@ -21,7 +21,7 @@ server.register(
         // Get public key hash from CodeChain
         // Create a nonce
         // Encrypt the nonce
-        const nonce = "0";
+        const nonce = getRandomNonce();
         await db.save(nonce);
         const callback = `http://${option.host}:${option.port}/`;
         return {
@@ -29,6 +29,10 @@ server.register(
         };
     }
 );
+
+function getRandomNonce() {
+    return String(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+}
 
 function encrypt(message: string, publicKey: string) {
     return message;
