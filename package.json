@@ -7,7 +7,10 @@
     "build": "tsc -p .",
     "test": "yarn lint",
     "lint": "tslint -p . && prettier 'src/**/*.{ts,json,js}' -l",
-    "fmt": "tslint -p . --fix && prettier 'src/**/*.{ts,json,js}' --write"
+    "fmt": "tslint -p . --fix && prettier 'src/**/*.{ts,json,js}' --write",
+    "run-server": "ts-node src/server/server.ts",
+    "run-client": "ts-node src/client.ts",
+    "run-setup": "ts-node test-setup/setup.ts"
   },
   "devDependencies": {
     "@types/config": "^0.0.34",
