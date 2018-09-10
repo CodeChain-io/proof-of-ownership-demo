@@ -3,7 +3,7 @@ export enum ErrorCode {
     PublicKeyMisedMatch
 }
 
-export class PoOErrormError extends Error {
+export class PoOError extends Error {
     constructor(public code: ErrorCode, message?: string) {
         super(message); // 'Error' breaks prototype chain here
         Object.setPrototypeOf(this, new.target.prototype); // restore prototype chain

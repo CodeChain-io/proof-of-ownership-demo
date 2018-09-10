@@ -1,5 +1,5 @@
 import { SDK } from "codechain-sdk";
-import { ErrorCode, PoOErrormError } from "./error";
+import { ErrorCode, PoOError } from "./error";
 
 export async function getPKH(params: {
     sdk: SDK;
@@ -13,7 +13,7 @@ export async function getPKH(params: {
     );
 
     if (asset === null) {
-        throw new PoOErrormError(ErrorCode.AssetNotFound);
+        throw new PoOError(ErrorCode.AssetNotFound);
     }
 
     return Buffer.from(asset.parameters[0]).toString("hex");

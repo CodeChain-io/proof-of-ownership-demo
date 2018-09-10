@@ -4,7 +4,7 @@ import { blake256 } from "codechain-sdk/lib/utils";
 import { encrypt } from "../crypto";
 import * as codechain from "./codechain";
 import * as db from "./db";
-import { ErrorCode, PoOErrormError } from "./error";
+import { ErrorCode, PoOError } from "./error";
 
 const WebSocketServer = require("rpc-websockets").Server;
 const option = require("config");
@@ -34,7 +34,7 @@ server.register(
                 transactionIndex
             });
             if (blake256(publicKey) !== pkh) {
-                throw new PoOErrormError(
+                throw new PoOError(
                     ErrorCode.PublicKeyMisedMatch,
                     `publicKey: ${publicKey} -> ${blake256(
                         publicKey
