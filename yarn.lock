@@ -128,15 +128,19 @@ bignumber.js@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-6.0.0.tgz#bbfa047644609a5af093e9cbd83b0461fa3f6002"
 
+bindings@^1.2.1:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.3.0.tgz#b346f6ecf6a95f5a815c5839fc7cdb22502f1ed7"
+
 blakejs@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/blakejs/-/blakejs-1.1.0.tgz#69df92ef953aa88ca51a32df6ab1c54a155fc7a5"
 
-bluebird@^3.5.0:
+bluebird@^3.0.2, bluebird@^3.5.0:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.2.tgz#1be0908e054a751754549c270489c1505d4ab15a"
 
-bn.js@^4.4.0:
+bn.js@^4.4.0, bn.js@^4.6.4:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
 
@@ -200,9 +204,9 @@ co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
 
-codechain-keystore@^0.1.0, "codechain-keystore@git://github.com/CodeChain-io/codechain-keystore.git#1483361b94c79e468e055188df0583046d4c9540":
+codechain-keystore@^0.1.0, "codechain-keystore@git://github.com/CodeChain-io/codechain-keystore.git#7c2f06b7a8885d385e6bb92ff6406a4537977a7a":
   version "0.1.0"
-  resolved "git://github.com/CodeChain-io/codechain-keystore.git#1483361b94c79e468e055188df0583046d4c9540"
+  resolved "git://github.com/CodeChain-io/codechain-keystore.git#7c2f06b7a8885d385e6bb92ff6406a4537977a7a"
   dependencies:
     codechain-sdk "^0.1.0-alpha.18"
     config "^2.0.1"
@@ -226,14 +230,14 @@ codechain-sdk@^0.1.0-alpha.18:
     ripemd160 "^2.0.2"
     rlp "^2.0.0"
 
-codechain-sdk@^0.1.1-alpha.2:
-  version "0.1.1-alpha.2"
-  resolved "https://registry.yarnpkg.com/codechain-sdk/-/codechain-sdk-0.1.1-alpha.2.tgz#670d89699de250735edb28986c12142e18d4e357"
+codechain-sdk@^0.1.1-alpha.4.rc0:
+  version "0.1.1-alpha.4.rc0"
+  resolved "https://registry.yarnpkg.com/codechain-sdk/-/codechain-sdk-0.1.1-alpha.4.rc0.tgz#919ffd470381f3402fbf8c494d942e1eadfc90ab"
   dependencies:
     bignumber.js "^6.0.0"
     blakejs "^1.1.0"
     buffer "5.1.0"
-    codechain-keystore "git://github.com/CodeChain-io/codechain-keystore.git#1483361b94c79e468e055188df0583046d4c9540"
+    codechain-keystore "git://github.com/CodeChain-io/codechain-keystore.git#7c2f06b7a8885d385e6bb92ff6406a4537977a7a"
     elliptic "^6.4.0"
     jayson "^2.0.6"
     lodash "^4.17.10"
@@ -318,7 +322,17 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-elliptic@^6.4.0:
+eccrypto@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/eccrypto/-/eccrypto-1.0.3.tgz#a4120e6ce98b0072c1ceaafdead156f6bb8b24e3"
+  dependencies:
+    elliptic "^6.0.2"
+    es6-promise "^3.0.2"
+    nan "^2.1.0"
+  optionalDependencies:
+    secp256k1 "^2.0.4"
+
+elliptic@^6.0.2, elliptic@^6.4.0:
   version "6.4.1"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.4.1.tgz#c2d0b7776911b86722c632c3c06c60f2f819939a"
   dependencies:
@@ -329,6 +343,10 @@ elliptic@^6.4.0:
     inherits "^2.0.1"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
+
+es6-promise@^3.0.2:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.3.1.tgz#a08cdde84ccdbf34d027a1451bc91d4bcd28a613"
 
 es6-promise@^4.0.3:
   version "4.2.4"
@@ -631,6 +649,10 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
+nan@^2.0.9, nan@^2.1.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.11.0.tgz#574e360e4d954ab16966ec102c0c049fd961a099"
+
 node-fetch@^2.1.2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.2.0.tgz#4ee79bde909262f9775f731e3656d0db55ced5b5"
@@ -638,6 +660,10 @@ node-fetch@^2.1.2:
 oauth-sign@~0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
+
+object-assign@^4.0.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
 once@^1.3.0:
   version "1.4.0"
@@ -758,6 +784,17 @@ safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@^5.1.2:
 safer-buffer@^2.0.2, safer-buffer@^2.1.0, safer-buffer@~2.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
+
+secp256k1@^2.0.4:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/secp256k1/-/secp256k1-2.0.10.tgz#c7d6a3c119e1ca44083c367b0715e184907417b3"
+  dependencies:
+    bindings "^1.2.1"
+    bluebird "^3.0.2"
+    bn.js "^4.6.4"
+    elliptic "^6.0.2"
+    nan "^2.0.9"
+    object-assign "^4.0.1"
 
 semver@^5.3.0:
   version "5.5.1"
