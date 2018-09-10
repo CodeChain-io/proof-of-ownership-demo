@@ -1,4 +1,5 @@
 import { SDK } from "codechain-sdk";
+import { getPublicFromPrivate } from "codechain-sdk/lib/utils";
 
 const option = require("config");
 const sdk = new SDK({ server: option.codechainRPCURL });
@@ -11,9 +12,16 @@ const sdk = new SDK({ server: option.codechainRPCURL });
 
     const address = await p2pkh.createAddress();
     const assetAccountPKH = address.payload.value;
+    const assetAccountPrivateKey = await keyStore.asset.exportRawKey({
+        key: assetAccountPKH
+    });
     const assetAccountPublicKey = await keyStore.asset.getPublicKey({
         key: assetAccountPKH
     });
+
+    console.assert(
+        getPublicFromPrivate(assetAccountPrivateKey) === assetAccountPublicKey
+    );
 
     // Create asset named Gold. Total amount of Gold is 10000. The registrar is set
     // to null, which means this type of asset can be transferred freely.
@@ -53,6 +61,7 @@ const sdk = new SDK({ server: option.codechainRPCURL });
     console.log(
         JSON.stringify({
             publicKey: assetAccountPublicKey,
+            privateKey: assetAccountPrivateKey,
             publicKeyHash: assetAccountPKH,
             assetTransactionHash: mintTx.hash().value,
             transactionIndex: 0

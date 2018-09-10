@@ -1,6 +1,7 @@
 import { SDK } from "codechain-sdk";
 import { blake256 } from "codechain-sdk/lib/utils";
 
+import { encrypt } from "../crypto";
 import * as codechain from "./codechain";
 import * as db from "./db";
 import { ErrorCode, PoOErrormError } from "./error";
@@ -26,8 +27,6 @@ server.register(
         assetTransactionHash: string;
         transactionIndex: number;
     }) => {
-        // Encrypt the nonce
-
         try {
             const pkh = await codechain.getPKH({
                 sdk,
@@ -47,7 +46,10 @@ server.register(
             await db.save(nonce);
             const callback = `http://${option.host}:${option.port}/`;
             return {
-                message: encrypt(JSON.stringify({ nonce, callback }), publicKey)
+                message: await encrypt(
+                    JSON.stringify({ nonce, callback }),
+                    publicKey
+                )
             };
         } catch (err) {
             if (err.toJSONRPCError) {
@@ -61,10 +63,6 @@ server.register(
 
 function getRandomNonce() {
     return String(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
-}
-
-function encrypt(message: string, publicKey: string) {
-    return message;
 }
 
 server.register("callback", async ({ nonce }: { nonce: string }) => {

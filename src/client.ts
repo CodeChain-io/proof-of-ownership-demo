@@ -1,9 +1,13 @@
+import { decrypt } from "./crypto";
+
 const RPCWebSocket = require("rpc-websockets").Client;
 
 const publicKey =
-    "d01e9f6fc4c8cc9c2354099f24a0cb4971255e6c82d508448ce5f82c852f0001caf74e313195e7ed6e152c120f59ef08ee8bdb1638c3e81d425ea58d51ca815b";
+    "08b87b1a5919fbe9c0b83b74a3ce941b3d83ab9ae33f6cc8a41098846d01dfb6a091257dfed1980c00aa3f9405b0dee13fa0bb8f876cc1d3ee8101358994a4b2";
+const privateKey =
+    "673909919aeca9e76196d81083fba9adc95d9cb2ba461b5b43c4785d0de54ecc";
 const assetTransactionHash =
-    "5ee13fb7a069d2514be26be85977daf24c6f604202475778b6983104199df0f3";
+    "8a04c0ecd473e507bc425cc29d77f7bd7f3a403bb2816e79e2c620a7c7d17228";
 const assetTransactionIndex = 0;
 const serverURL = "ws://localhost:9009";
 
@@ -16,8 +20,12 @@ async function main() {
     });
     ws.close();
 
-    // FIXME: need public key decryption.
-    const { nonce, callback } = JSON.parse(result.message);
+    console.log(`message = ${result.message}\n`);
+
+    const decryptedMessage = await decrypt(result.message, privateKey);
+    console.log(`decryptedMessage = ${decryptedMessage}\n`);
+
+    const { nonce, callback } = JSON.parse(decryptedMessage);
     ws = await openSocket(callback);
     const verificationResult = await ws.call("callback", {
         nonce
