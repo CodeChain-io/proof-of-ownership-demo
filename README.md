@@ -2,11 +2,11 @@
 
 ## Pre-requiesite
 
-A CodeChain node with solo chain. // we use solo's genesis address to pay for the fee.
+A CodeChain node with solo chain. // we use the solo's genesis address to pay for the fee.
 
 ## Setup
 
-Create public key, private key, asset.
+The setup script creates a public key, a private key and an asset.
 
 ```bash
 yarn run-setup
@@ -20,7 +20,7 @@ yarn run-server
 
 ## Run client
 
-Change parameters in the src/client.ts file using printed values from the setup.
+Change parameters in the `src/client.ts` file using the result of the setup script.
 
 ```bash
 yarn run-client
